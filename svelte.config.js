@@ -15,7 +15,7 @@ const config = {
 		}),
 		paths: {
             // DEVE corrispondere al nome del repo su GitHub
-            base: process.env.NODE_ENV === 'production' ? '/PORTFOGLIO' : '',
+            base: process.env.NODE_ENV === 'production' ? '/Portfoglio' : '',
         }
 	}
 };
