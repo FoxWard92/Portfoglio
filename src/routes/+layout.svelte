@@ -51,21 +51,21 @@
 			class:scrolled
 			class:clicked={SegmentActiveLink === "educazione_civica"}
 			on:click={() => {
-				goto(`{base}/educazione_civica`);
+				goto(`/educazione_civica`);
 			}}>Educazione Civica</button
 		>
 		<button
 			class:scrolled
 			class:clicked={SegmentActiveLink === "progetti_extra"}
 			on:click={() => {
-				goto(`{base}/progetti_extra`);
+				goto(`/progetti_extra`);
 			}}>Progetti Extra</button
 		>
 		<button
 			class:scrolled
 			class:clicked={SegmentActiveLink === "social"}
 			on:click={() => {
-				goto(`{base}/educazione_civica`);
+				goto(`/educazione_civica`);
 			}}>Social</button
 		>
 	</header>
