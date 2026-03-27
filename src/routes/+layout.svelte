@@ -57,7 +57,6 @@
 		<button
 			class:scrolled
 			class:clicked={SegmentActiveLink === "progetti_extra"}
-			href="/progetti_extra"
 			on:click={() => {
 				goto(`{base}/progetti_extra`);
 			}}>Progetti Extra</button
@@ -65,7 +64,6 @@
 		<button
 			class:scrolled
 			class:clicked={SegmentActiveLink === "social"}
-			href="/social"
 			on:click={() => {
 				goto(`{base}/educazione_civica`);
 			}}>Social</button
