@@ -1,194 +1,322 @@
 <script>
-	let scrollContainer;
-	let scrolled = false;
-	let LinkList;
-	let ActiveLink = 0;
+	import { goto } from "$app/navigation";
+	import { onMount } from "svelte";
+	import { base } from "$app/paths";
 
+	let scrolled = false;
+	let ScreenContainerScroll = null;
+	let videoElement = null;
+	let SegmentActiveLink = "";
+
+	function handleScroll() {
+		if (!ScreenContainerScroll) return;
+
+		const scrollTop = ScreenContainerScroll.scrollTop;
+
+		// 1. Gestione Header/Footer (scrolled)
+		scrolled = scrollTop > 100;
+
+		// 2. Controllo Video (Scrubbing)
+		if (videoElement && videoElement.duration) {
+			const maxScroll =
+				ScreenContainerScroll.scrollHeight -
+				ScreenContainerScroll.clientHeight;
+			const scrollFraction = scrollTop / maxScroll;
+
+			// Imposta il tempo del video in base alla percentuale di scroll
+			videoElement.currentTime = videoElement.duration * scrollFraction;
+		}
+	}
+
+	onMount(() => {
+		const path = window.location.pathname;
+		const segments = path.split("/").filter(Boolean);
+		if (segments.length > 0)
+			SegmentActiveLink = segments[segments.length - 1] ?? "";
+
+		handleScroll();
+	});
 </script>
 
 <section>
-
-	<main bind:this={scrollContainer} on:scroll={() => {scrolled = scrollContainer.scrollTop > 100}} class:scrolled>
-		<slot />
-	</main>
-
 	<header class:scrolled>
-		<ul class:scrolled bind:this={LinkList}>
-			<li class:clicked={ActiveLink === 0}>
-				<a href="/" on:click={() => {ActiveLink = 0}}>Home</a>
-			</li>
-			<li class:clicked={ActiveLink === 1}>
-				<a href="/chi_sono" on:click={() => {ActiveLink = 1}}>Chi sono</a>
-			</li>
-			<li class:clicked={ActiveLink === 2}>
-				<a href="/ed_civica" on:click={() => {ActiveLink = 2}}
-					>Educazione Civica</a
-				>
-			</li>
-			<li class:clicked={ActiveLink === 3}>
-				<a href="/progetti_extra" on:click={() => {ActiveLink = 3}}>Progetti extra</a>
-			</li>
-			<li class:clicked={ActiveLink === 4}>
-				<a href="/social" on:click={() => {ActiveLink = 4}}>Social</a>
-			</li>
-		</ul>
+		<button
+			class:scrolled
+			class:clicked={SegmentActiveLink === ""}
+			on:click={() => {
+				goto(`/`);
+			}}>Home</button
+		>
+		<button
+			class:scrolled
+			class:clicked={SegmentActiveLink === "educazione_civica"}
+			href="/ed_civica"
+			on:click={() => {
+				goto(`/educazione_civica`);
+			}}>Educazione Civica</button
+		>
+		<button
+			class:scrolled
+			class:clicked={SegmentActiveLink === "progetti_extra"}
+			href="/progetti_extra"
+			on:click={() => {
+				goto(`/progetti_extra`);
+			}}>Progetti Extra</button
+		>
+		<button
+			class:scrolled
+			class:clicked={SegmentActiveLink === "social"}
+			href="/social"
+			on:click={() => {
+				goto(`/educazione_civica`);
+			}}>Social</button
+		>
 	</header>
+
+	<div id="main-container">
+		<video
+			bind:this={videoElement}
+			src="/asset/background/bg.mp4"
+			muted
+			playsinline
+			preload="auto"
+			class="bg-video"
+		>
+			<track kind="captions" />
+		</video>
+
+		<div
+			id="slot-container"
+			bind:this={ScreenContainerScroll}
+			on:scroll={handleScroll}
+		>
+			<div class="content-wrapper">
+				<slot></slot>
+			</div>
+		</div>
+	</div>
 
 	<footer class:scrolled>
 		&copy; {new Date().getFullYear()} Portfolio Digitale — Codice, Creatività
 		e Futuro.
 	</footer>
-
 </section>
 
 <style>
 	:global(body) {
-		margin: 0;;
-		display: flex;
-		justify-content: center;
-		font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-		background: linear-gradient(0deg,#0f2027 0%,#203a43 40%,#2c5364 100%);
-
-
+		margin: 0;
+		background: #1a1a1a;
 	}
 
-	:root {
-		--max-screen-width: 3000px;
-		--color-text-p: #d4d4d4;
-		--color-text-h1: #ffffff;
+	#main-container {
+		flex: 1;
+		width: 100%;
+		position: relative;
+		overflow: hidden;
 	}
 
-	section{
+	.bg-video {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover; /* Riempie lo schermo senza deformarsi */
+		z-index: 0;
+	}
+
+	#slot-container {
+		position: relative;
+		z-index: 1; /* Sopra il video */
+		height: 100%;
+		width: 100%;
+		overflow-y: auto;
+		backdrop-filter: blur(
+			10px
+		); /* Opzionale: sfoca il video dietro il testo */
+	}
+
+	/* Wrapper per dare altezza e permettere lo scroll se lo slot è vuoto o corto */
+	.content-wrapper {
+		min-height: 200vh;
+		width: 100%;
+	}
+
+	section {
 		height: 100vh;
 		width: 100%;
-		max-width: var(--max-screen-width);
+		margin: auto;
+		max-width: 2500px;
+		display: flex;
+		justify-content: start;
+		align-items: center;
+		flex-direction: column;
+		overflow: hidden;
 	}
 
 	header {
-		height: 15%;
+		height: 20%;
 		width: 100%;
-		max-width: var(--max-screen-width);
+		max-width: 2500px;
 		display: flex;
-		justify-content: center;
+		justify-content: space-around;
 		align-items: center;
 		overflow: hidden;
 		position: absolute;
 		top: 80%;
+		z-index: 2;
 	}
 
 	header.scrolled {
 		top: 0;
-		background: rgba(255, 255, 255, 0.200);
+		background: rgba(255, 255, 255, 0.2);
 		backdrop-filter: blur(10px);
 	}
 
-	ul {
-		width: 90%;
-		list-style: none;
-		display: flex;
-		justify-content: space-around;
-		padding: 0;
-		margin: 0;
-	}
-
-	ul li {
-		background: linear-gradient(-135deg, #3a3a3a, #a3a3a3);
-		transform: rotate(0deg) skew(10deg);
-		box-shadow: -20px 20px 10px rgba(0, 0, 0, 0.5);
-		width: clamp(8rem, 15vw, 15rem);
-		height: clamp(3rem, 6vh, 5rem);
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		font-weight: bolder;
-		transition: all 0.3s ease;
-	}
-
-	ul.scrolled li {
+	button.scrolled {
 		transform: rotate(0deg) skew(0deg);
 	}
 
-	ul li a {
-		font-size: 1.4rem;
+	button {
+		height: 25%;
+		width: 20%;
+		max-width: 250px;
+		cursor: pointer;
+		background: linear-gradient(
+			-135deg,
+			rgba(50, 190, 255, 0.767),
+			rgba(140, 194, 245, 0.692)
+		);
+		transform: rotate(0deg) skew(10deg);
+		transition: all 0.5s ease;
+		border: none;
+		font-size: larger;
 		color: #ffffff;
-		text-decoration: none;
+		font-weight: bolder;
+		font-family: Arial, Helvetica, sans-serif;
 	}
 
-	ul li a:before {
+	button:before {
 		content: "";
 		position: absolute;
 		top: 10px;
 		left: -20px;
 		width: 20px;
 		height: 100%;
-		background: linear-gradient(180deg, #3a3a3a, #a3a3a3);
+		background: linear-gradient(
+			180deg,
+			rgba(50, 190, 255, 0.767),
+			rgba(140, 194, 245, 0.692)
+		);
 		transform: rotate(0deg) skewY(-45deg);
 	}
 
-	ul li a:after {
+	button:after {
 		content: "";
 		position: absolute;
 		bottom: -20px;
 		left: -10px;
 		width: 100%;
 		height: 20px;
-		background: linear-gradient(-90deg, #3a3a3a, #a3a3a3);
+		background: linear-gradient(
+			-90deg,
+			rgba(50, 190, 255, 0.767),
+			rgba(140, 194, 245, 0.692)
+		);
 		transform: rotate(0deg) skewX(-45deg);
 	}
 
-	ul li:hover,
-	ul li.clicked {
+	button:hover,
+	button.clicked {
 		translate: 10px -10px;
-		background: linear-gradient(-135deg, #004ca3, #3887ff);
-	}
-
-	ul li:hover ::before,
-	ul li.clicked ::before {
-		background: linear-gradient(180deg, #004ca3, #3887ff);
-	}
-
-	ul li:hover ::after,
-	ul li.clicked ::after {
-		background: linear-gradient(-90deg, #004ca3, #3887ff);
-	}
-
-	ul li:hover a,
-	ul li.clicked a {
 		color: #121212;
 	}
 
-	main {
-		overflow-x: hidden;
-		overflow-y: scroll;
-		height: 100vh;
+	button:not(.clicked):hover {
+		background: linear-gradient(
+			-135deg,
+			rgba(98, 205, 255, 0.767),
+			rgba(174, 216, 255, 0.692)
+		);
 	}
 
-	main.scrolled {
-		height: 95vh;
+	button:not(.clicked):hover::before {
+		background: linear-gradient(
+			180deg,
+			rgba(98, 205, 255, 0.767),
+			rgba(174, 216, 255, 0.692)
+		);
+	}
+
+	button:not(.clicked):hover::after {
+		background: linear-gradient(
+			-90deg,
+			rgba(98, 205, 255, 0.767),
+			rgba(174, 216, 255, 0.692)
+		);
+	}
+
+	button.clicked {
+		background: linear-gradient(
+			-135deg,
+			rgba(50, 190, 255, 0.767),
+			rgba(140, 194, 245, 0.692)
+		);
+	}
+	button.clicked::before {
+		background: linear-gradient(
+			180deg,
+			rgba(50, 190, 255, 0.767),
+			rgba(140, 194, 245, 0.692)
+		);
+	}
+	button.clicked::after {
+		background: linear-gradient(
+			-90deg,
+			rgba(50, 190, 255, 0.767),
+			rgba(140, 194, 245, 0.692)
+		);
 	}
 
 	footer {
-		display: none;
+		height: 10px;
+		width: 100%;
+		opacity: 0;
+		display: flex;
 		background: linear-gradient(90deg, #1a1a1a, #333);
-		height: calc(5% - 2px);
-		text-align: center;
+		justify-content: center;
+		align-items: center;
 		font-size: 0.85rem;
 		color: #777;
 		border-top: 2px solid #1a1a1a;
 	}
 
 	footer.scrolled {
-		display: block;
+		height: 100px;
+		opacity: 1;
 	}
 
-	@keyframes fadeInUp {
-		from {
-			opacity: 0;
-			transform: translateY(30px);
-		}
-		to {
-			opacity: 1;
-			transform: translateY(0);
-		}
+	/* Firefox */
+	* {
+		scrollbar-width: thin;
+		scrollbar-color: #6fd3ff #081a33;
+	}
+
+	/* Chrome, Edge, Safari */
+	*::-webkit-scrollbar {
+		width: 12px;
+		height: 12px;
+	}
+	*::-webkit-scrollbar-track {
+		background: #081a33;
+		border-radius: 10px;
+	}
+	*::-webkit-scrollbar-thumb {
+		background-color: #6fd3ff;
+		border-radius: 10px;
+		border: 3px solid #081a33;
+	}
+	*::-webkit-scrollbar-thumb:hover {
+		background-color: #2a6cff;
 	}
 </style>
