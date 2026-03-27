@@ -14,10 +14,9 @@ const config = {
 			strict: true
 		}),
 		paths: {
-			// SOSTITUISCI 'nome-del-tuo-repo' con il nome reale del tuo progetto su GitHub
-			// Se il sito è su username.github.io lasciarlo vuoto: ''
-			base: process.env.NODE_ENV === 'production' ? '/Portfoglio' : '',
-		}
+            // DEVE corrispondere al nome del repo su GitHub
+            base: process.env.NODE_ENV === 'production' ? '/PORTFOGLIO' : '',
+        }
 	}
 };
 

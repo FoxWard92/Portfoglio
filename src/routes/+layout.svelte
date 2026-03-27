@@ -44,15 +44,14 @@
 			class:scrolled
 			class:clicked={SegmentActiveLink === ""}
 			on:click={() => {
-				goto(`/`);
+				goto(`{base}/`);
 			}}>Home</button
 		>
 		<button
 			class:scrolled
 			class:clicked={SegmentActiveLink === "educazione_civica"}
-			href="/ed_civica"
 			on:click={() => {
-				goto(`/educazione_civica`);
+				goto(`{base}/educazione_civica`);
 			}}>Educazione Civica</button
 		>
 		<button
@@ -60,7 +59,7 @@
 			class:clicked={SegmentActiveLink === "progetti_extra"}
 			href="/progetti_extra"
 			on:click={() => {
-				goto(`/progetti_extra`);
+				goto(`{base}/progetti_extra`);
 			}}>Progetti Extra</button
 		>
 		<button
@@ -68,7 +67,7 @@
 			class:clicked={SegmentActiveLink === "social"}
 			href="/social"
 			on:click={() => {
-				goto(`/educazione_civica`);
+				goto(`{base}/educazione_civica`);
 			}}>Social</button
 		>
 	</header>
