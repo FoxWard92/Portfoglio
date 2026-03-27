@@ -1,25 +1,27 @@
 <script>
-    import { fade } from 'svelte/transition';
+    import { fade } from "svelte/transition";
+    import { base } from "$app/paths";
 
     // Struttura dati: facile da aggiornare senza toccare l'HTML
     const timeline = [
         {
             yearTitle: "Primo Anno",
-            yearDesc: "Introduzione alla cittadinanza digitale e ai fondamenti della Costituzione.",
+            yearDesc:
+                "Introduzione alla cittadinanza digitale e ai fondamenti della Costituzione.",
             projects: [
                 {
                     title: "La Costituzione Italiana",
                     meta: "Materia: Diritto // A.S. 2021/2022",
                     desc: "Analisi dei principi fondamentali della nostra Carta Costituzionale, con particolare attenzione agli articoli riguardanti i diritti e i doveri del cittadino.",
-                    imgAlt: "Documento Costituzione Italiana"
+                    imgAlt: "Documento Costituzione Italiana",
                 },
                 {
                     title: "La Costituzione Francese",
                     meta: "Materia: Diritto // A.S. 2021/2022",
                     desc: "Studio comparato sui principi fondamentali della costituzione francese e le differenze con l'ordinamento italiano.",
-                    imgAlt: "Documento Costituzione Francese"
-                }
-            ]
+                    imgAlt: "Documento Costituzione Francese",
+                },
+            ],
         },
         {
             yearTitle: "Secondo Anno",
@@ -29,15 +31,15 @@
                     title: "Sostenibilità e Risorse",
                     meta: "Materia: Scienze // A.S. 2022/2023",
                     desc: "Studio dell'impatto ambientale delle tecnologie moderne e analisi degli obiettivi dell'Agenda 2030 per lo sviluppo sostenibile del pianeta.",
-                    imgAlt: "Progetto Sostenibilità"
+                    imgAlt: "Progetto Sostenibilità",
                 },
                 {
                     title: "Sostenibilità e Risorse",
                     meta: "Materia: Scienze // A.S. 2022/2023",
                     desc: "Studio dell'impatto ambientale delle tecnologie moderne e analisi degli obiettivi dell'Agenda 2030 per lo sviluppo sostenibile del pianeta.",
-                    imgAlt: "Progetto Sostenibilità"
-                }
-            ]
+                    imgAlt: "Progetto Sostenibilità",
+                },
+            ],
         },
         {
             yearTitle: "Terzo Anno",
@@ -47,9 +49,9 @@
                     title: "Cyberbullismo e Netiquette",
                     meta: "Materia: Informatica // A.S. 2023/2024",
                     desc: "Approfondimento sulle dinamiche della rete, la protezione dei dati personali e le responsabilità legali e morali nell'uso dei social network.",
-                    imgAlt: "Presentazione Cyberbullismo"
-                }
-            ]
+                    imgAlt: "Presentazione Cyberbullismo",
+                },
+            ],
         },
         {
             yearTitle: "Quarto Anno",
@@ -59,9 +61,9 @@
                     title: "Sicurezza sul Lavoro",
                     meta: "Materia: Sistemi e Reti // A.S. 2024/2025",
                     desc: "Corso di formazione specifica sulla sicurezza negli ambienti di lavoro, fondamentale per l'integrazione nei percorsi di PCTO.",
-                    imgAlt: "Attestato Sicurezza"
-                }
-            ]
+                    imgAlt: "Attestato Sicurezza",
+                },
+            ],
         },
         {
             yearTitle: "Quinto Anno",
@@ -71,10 +73,10 @@
                     title: "Cittadinanza e Innovazione",
                     meta: "Materia: Telecomunicazioni // A.S. 2025/2026",
                     desc: "Riflessione sul ruolo dell'ingegneria e della tecnologia nella società moderna e l'importanza dell'etica professionale nel settore IT.",
-                    imgAlt: "Progetto Innovazione"
-                }
-            ]
-        }
+                    imgAlt: "Progetto Innovazione",
+                },
+            ],
+        },
     ];
 
     // Array reattivo per tenere traccia della slide attiva per ogni anno
@@ -89,7 +91,8 @@
 
     function prevSlide(yearIndex) {
         const totalProjects = timeline[yearIndex].projects.length;
-        activeSlides[yearIndex] = (activeSlides[yearIndex] - 1 + totalProjects) % totalProjects;
+        activeSlides[yearIndex] =
+            (activeSlides[yearIndex] - 1 + totalProjects) % totalProjects;
     }
 
     function goToSlide(yearIndex, projectIndex) {
@@ -103,7 +106,7 @@
             <h1>Educazione Civica</h1>
             <p class="tagline">Percorso Multidisciplinare // 2021 — 2026</p>
         </div>
-        
+
         <div class="scroll-indicator">
             <span>Esplora i progetti</span>
             <div class="line"></div>
@@ -122,8 +125,12 @@
                 {#key activeSlides[yearIndex]}
                     <div class="split" in:fade={{ duration: 400 }}>
                         <div class="project-content">
-                            <h3>{year.projects[activeSlides[yearIndex]].title}</h3>
-                            <p class="meta">{year.projects[activeSlides[yearIndex]].meta}</p>
+                            <h3>
+                                {year.projects[activeSlides[yearIndex]].title}
+                            </h3>
+                            <p class="meta">
+                                {year.projects[activeSlides[yearIndex]].meta}
+                            </p>
                             <p>{year.projects[activeSlides[yearIndex]].desc}</p>
                         </div>
                         <aside>
@@ -136,19 +143,32 @@
 
                 {#if year.projects.length > 1}
                     <div class="gallery-controls">
-                        <button class="arrow-btn" on:click={() => prevSlide(yearIndex)}>&#10094;</button>
-                        
+                        <button
+                            class="arrow-btn"
+                            on:click={() => prevSlide(yearIndex)}
+                            >&#10094;</button
+                        >
+
                         <div class="dots">
                             {#each year.projects as _, projectIndex}
-                                <button 
-                                    class="dot {activeSlides[yearIndex] === projectIndex ? 'active' : ''}" 
-                                    on:click={() => goToSlide(yearIndex, projectIndex)}
-                                    aria-label="Vai al progetto {projectIndex + 1}"
+                                <button
+                                    class="dot {activeSlides[yearIndex] ===
+                                    projectIndex
+                                        ? 'active'
+                                        : ''}"
+                                    on:click={() =>
+                                        goToSlide(yearIndex, projectIndex)}
+                                    aria-label="Vai al progetto {projectIndex +
+                                        1}"
                                 ></button>
                             {/each}
                         </div>
 
-                        <button class="arrow-btn" on:click={() => nextSlide(yearIndex)}>&#10095;</button>
+                        <button
+                            class="arrow-btn"
+                            on:click={() => nextSlide(yearIndex)}
+                            >&#10095;</button
+                        >
                     </div>
                 {/if}
             </div>
@@ -161,7 +181,7 @@
         width: 100%;
         color: #ffffff;
         padding-bottom: 15vh;
-        font-family: 'Inter', sans-serif;
+        font-family: "Inter", sans-serif;
     }
 
     /* HERO */
@@ -216,7 +236,7 @@
         margin: 0 auto;
         padding: 10vh 2rem;
         /* Sostituisce l'HR: crea uno stacco naturale con lo spazio */
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05); 
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .year-section:last-child {
@@ -316,7 +336,9 @@
         font-size: 1.5rem;
         cursor: pointer;
         padding: 10px;
-        transition: color 0.3s, transform 0.3s;
+        transition:
+            color 0.3s,
+            transform 0.3s;
     }
 
     .arrow-btn:hover {

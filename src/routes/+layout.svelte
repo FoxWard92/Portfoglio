@@ -76,7 +76,7 @@
 	<div id="main-container">
 		<video
 			bind:this={videoElement}
-			src="/asset/background/bg.mp4"
+			src="{base}/asset/background/bg.mp4"
 			muted
 			playsinline
 			preload="auto"
