@@ -42,7 +42,7 @@
 	<header class:scrolled>
 		<button
 			class:scrolled
-			class:clicked={SegmentActiveLink === "Portfoglio"}
+			class:clicked={SegmentActiveLink === "Portfoglio" || SegmentActiveLink === ""}
 			on:click={() => {
 				SegmentActiveLink = "Portfoglio";
 				goto(`${base}/`);
