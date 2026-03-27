@@ -44,6 +44,7 @@
 			class:scrolled
 			class:clicked={SegmentActiveLink === "Portfoglio"}
 			on:click={() => {
+				SegmentActiveLink = "Portfoglio";
 				goto(`${base}/`);
 			}}>Home</button
 		>
@@ -51,6 +52,7 @@
 			class:scrolled
 			class:clicked={SegmentActiveLink === "educazione_civica"}
 			on:click={() => {
+				SegmentActiveLink = "educazione_civica";
 				goto(`${base}/educazione_civica`);
 			}}>Educazione Civica</button
 		>
