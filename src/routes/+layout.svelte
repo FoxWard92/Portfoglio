@@ -60,6 +60,7 @@
 			class:scrolled
 			class:clicked={SegmentActiveLink === "progetti_extra"}
 			on:click={() => {
+				SegmentActiveLink = "progetti_extra";
 				goto(`${base}/progetti_extra`);
 			}}>Progetti Extra</button
 		>
