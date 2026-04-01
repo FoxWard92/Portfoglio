@@ -23,8 +23,7 @@
 				ScreenContainerScroll.clientHeight;
 			const scrollFraction = scrollTop / maxScroll;
 
-			// Imposta il tempo del video in base alla percentuale di scroll
-			videoElement.currentTime = videoElement.duration * scrollFraction;
+			videoElement.currentTime =  videoElement.duration * scrollFraction;
 		}
 	}
 
