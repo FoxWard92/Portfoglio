@@ -42,7 +42,8 @@
 	<header class:scrolled>
 		<button
 			class:scrolled
-			class:clicked={SegmentActiveLink === "Portfoglio" || SegmentActiveLink === ""}
+			class:clicked={SegmentActiveLink === "Portfoglio" ||
+				SegmentActiveLink === ""}
 			on:click={() => {
 				SegmentActiveLink = "Portfoglio";
 				goto(`${base}/`);
@@ -55,22 +56,6 @@
 				SegmentActiveLink = "educazione_civica";
 				goto(`${base}/educazione_civica`);
 			}}>Educazione Civica</button
-		>
-		<button
-			class:scrolled
-			class:clicked={SegmentActiveLink === "progetti_extra"}
-			on:click={() => {
-				SegmentActiveLink = "progetti_extra";
-				goto(`${base}/progetti_extra`);
-			}}>Progetti Extra</button
-		>
-		<button
-			class:scrolled
-			class:clicked={SegmentActiveLink === "social"}
-			on:click={() => {
-				SegmentActiveLink = "social";
-				goto(`${base}/educazione_civica`);
-			}}>Social</button
 		>
 	</header>
 
@@ -183,10 +168,11 @@
 		width: 20%;
 		max-width: 250px;
 		cursor: pointer;
+		/* NORMAL: Azzurro bilanciato */
 		background: linear-gradient(
 			-135deg,
-			rgba(50, 190, 255, 0.767),
-			rgba(140, 194, 245, 0.692)
+			rgba(100, 200, 255, 0.8),
+			rgba(160, 210, 255, 0.7)
 		);
 		transform: rotate(0deg) skew(10deg);
 		transition: all 0.5s ease;
@@ -195,6 +181,7 @@
 		color: #ffffff;
 		font-weight: bolder;
 		font-family: Arial, Helvetica, sans-serif;
+		position: relative; /* Necessario per i pseudo-elementi */
 	}
 
 	button:before {
@@ -204,12 +191,14 @@
 		left: -20px;
 		width: 20px;
 		height: 100%;
+		/* Lato sinistro leggermente più scuro per profondità */
 		background: linear-gradient(
 			180deg,
-			rgba(50, 190, 255, 0.767),
-			rgba(140, 194, 245, 0.692)
+			rgba(70, 170, 230, 0.8),
+			rgba(130, 180, 220, 0.7)
 		);
 		transform: rotate(0deg) skewY(-45deg);
+		transition: all 0.5s ease;
 	}
 
 	button:after {
@@ -219,64 +208,54 @@
 		left: -10px;
 		width: 100%;
 		height: 20px;
+		/* Lato inferiore ancora più scuro */
 		background: linear-gradient(
 			-90deg,
-			rgba(50, 190, 255, 0.767),
-			rgba(140, 194, 245, 0.692)
+			rgba(50, 150, 210, 0.8),
+			rgba(110, 160, 200, 0.7)
 		);
 		transform: rotate(0deg) skewX(-45deg);
+		transition: all 0.5s ease;
 	}
 
 	button:hover,
 	button.clicked {
 		translate: 10px -10px;
-		color: #121212;
+		color: #003355; /* Testo blu scuro per contrasto su azzurro chiaro */
 	}
 
 	button:not(.clicked):hover {
+		/* HOVER: Molto più vibrante e luminoso */
 		background: linear-gradient(
 			-135deg,
-			rgba(98, 205, 255, 0.767),
-			rgba(174, 216, 255, 0.692)
+			rgba(0, 180, 255, 1),
+			rgba(130, 220, 255, 0.9)
 		);
 	}
 
 	button:not(.clicked):hover::before {
-		background: linear-gradient(
-			180deg,
-			rgba(98, 205, 255, 0.767),
-			rgba(174, 216, 255, 0.692)
-		);
+		background: rgba(0, 160, 230, 1);
 	}
 
 	button:not(.clicked):hover::after {
-		background: linear-gradient(
-			-90deg,
-			rgba(98, 205, 255, 0.767),
-			rgba(174, 216, 255, 0.692)
-		);
+		background: rgba(0, 140, 210, 1);
 	}
 
 	button.clicked {
 		background: linear-gradient(
 			-135deg,
-			rgba(50, 190, 255, 0.767),
-			rgba(140, 194, 245, 0.692)
+			rgb(165, 230, 255),
+			rgba(171, 228, 255, 0.95)
 		);
+		box-shadow: -5px 5px 15px rgba(0, 150, 255, 0.3);
 	}
+
 	button.clicked::before {
-		background: linear-gradient(
-			180deg,
-			rgba(50, 190, 255, 0.767),
-			rgba(140, 194, 245, 0.692)
-		);
+		background: rgba(50, 150, 210, 0.8);
 	}
+
 	button.clicked::after {
-		background: linear-gradient(
-			-90deg,
-			rgba(50, 190, 255, 0.767),
-			rgba(140, 194, 245, 0.692)
-		);
+		background: rgba(40, 130, 190, 0.8);
 	}
 
 	footer {

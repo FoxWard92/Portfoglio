@@ -13,7 +13,7 @@
         </div>
         
         <div class="scroll-indicator">
-            <span>Scroll to explore</span>
+            <span>Scrolla Per vedere</span>
             <div class="line"></div>
         </div>
     </div>
@@ -52,37 +52,6 @@
                 <p>Esperienza pratica nell'uso di schede Arduino e Raspberry Pi, inclusa la creazione di progetti domotici.</p>
             </div>
         </div>
-    </article>
-
-    <article class="split">
-        <div>
-            <span class="label">03 // Certificazioni e Progetti Extra</span>
-            <p>Il mio profilo è arricchito da diverse certificazioni ottenute con Hackergen (HTML/CSS, Introduzione all'IA, Git & GitHub) e dalla formazione sulla sicurezza sul lavoro (2023).</p>
-            <p>Ho partecipato attivamente a competizioni di rilievo come la Reply Cyber Security Challenge (edizioni 2023, 2024 e 2025) e la First Lego League a Milano (2022).</p>
-        </div>
-        <aside>
-            <img src="{base}/asset/cert/html_css.jpeg" alt="Certificazioni Hackergen" />
-        </aside>
-    </article>
-
-    <article>
-        <span class="label">04 // Esperienze e PCTO</span>
-        <div class="exp-item">
-            <h3>Open Day Scolastici</h3>
-            <p>In qualità di espositore, ho progettato una casa domotica con Arduino e presentato al pubblico siti web e progetti di sviluppo (tra cui Data Show, Dino Crisis_2D e gallerie Minecraft), dimostrando ottime capacità di comunicazione tecnica.</p>
-        </div>
-        <div class="exp-item">
-            <h3>Collaborazioni Esterne</h3>
-            <p>Ho realizzato un sito web per la presentazione di un progetto Stellantis e ho svolto attività presso il CSI Piemonte, occupandomi di servizi digitali per la pubblica amministrazione.</p>
-        </div>
-    </article>
-
-    <article>
-        <span class="label">05 // Competenze Personali e Interessi</span>
-        <p>Oltre alle hard skills, possiedo spiccate capacità di analisi, problem solving e attitudine al lavoro di squadra. Sono una persona precisa, attenta ai dettagli e capace di organizzare progetti complessi. Parlo fluentemente italiano (madrelingua) e ho una buona conoscenza dell'inglese e del francese.</p>
-        <p class="description">
-            Nel tempo libero coltivo interessi diversi che spaziano dall'equitazione e la musica hip hop ai viaggi, mantenendo sempre un focus attivo sulla tecnologia e la robotica.
-        </p>
     </article>
 </section>
 
@@ -206,35 +175,7 @@
         gap: 3rem;
     }
 
-    .split {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 4rem;
-        align-items: center;
-    }
-
-    aside img {
-        width: 100%;
-        border-radius: 20px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-        transition: transform 0.5s ease;
-    }
-
-    aside img:hover {
-        transform: scale(1.02);
-    }
-
-    .exp-item {
-        margin-bottom: 4rem;
-        border-left: 2px solid rgba(111, 211, 255, 0.3);
-        padding-left: 2rem;
-    }
-
     @media (max-width: 768px) {
-        .split {
-            grid-template-columns: 1fr;
-        }
         article {
             padding: 10vh 2rem;
         }
