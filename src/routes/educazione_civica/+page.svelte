@@ -46,10 +46,16 @@
             yearDesc: "Etica digitale e sicurezza informatica.",
             projects: [
                 {
-                    title: "Cyberbullismo e Netiquette",
-                    meta: "Materia: Informatica // A.S. 2024/2025",
-                    desc: "Approfondimento sulle dinamiche della rete, la protezione dei dati personali e le responsabilità legali e morali nell'uso dei social network.",
-                    imgAlt: "Cod_Towe",
+                    title: "Eco Mafie",
+                    meta: "STORIA // PRESENTAZIONE // A.S. 2023/2024",
+                    desc: "Analisi delle attività illecite delle organizzazioni criminali a danno dell'ambiente: dal traffico dei rifiuti all'abusivismo edilizio, con focus sull'impatto economico e sociale nel contesto italiano.",
+                    imgAlt: "Presentazione_Eco_Mafia",
+                },
+                {
+                    title: "La Mattanza Mafie",
+                    meta: "ITALIANO // ELABORATO // A.S. 2023/2024",
+                    desc: "Analisi del periodo più violento della lotta tra Stato e criminalità organizzata: una riflessione sul valore della memoria attraverso le testimonianze dirette e la letteratura d'impegno civile.",
+                    imgAlt: "Elaborato_La_Mattanza",
                 }
             ],
         },
@@ -59,13 +65,13 @@
             projects: [
                 {
                     title: "Progetto Videogioco: Cod Tower",
-                    meta: "Educazione Civica // Informatica // A.S. 2024/2025",
+                    meta: "Informatica // Python //A.S. 2024/2025",
                     desc: "Un progetto volto a sensibilizzare gli utenti sul tema della dipendenza da videogiochi.",
                     imgAlt: "Cod_Tower",
                 },
                 {
                     title: "Progetto: Quiz Patente",
-                    meta: "Informatica // Sviluppo Web // A.S. 2024/2025",
+                    meta: "Informatica // Python // A.S. 2024/2025",
                     desc: "Un'applicazione interattiva progettata per l'esercitazione e il completamento dei quiz ministeriali della patente.",
                     imgAlt: "Quiz_Patente",
                 },
@@ -76,9 +82,9 @@
             yearDesc: "Verso l'esame di Stato e la vita professionale.",
             projects: [
                 {
-                    title: "Cittadinanza e Innovazione",
-                    meta: "Materia: Telecomunicazioni // A.S. 2025/2026",
-                    desc: "Riflessione sul ruolo dell'ingegneria e della tecnologia nella società moderna e l'importanza dell'etica professionale nel settore IT.",
+                    title: "Progetto 1522",
+                    meta: "INFORMATICA // WEB APP // A.S. 2025/2026",
+                    desc: "Progettazione e realizzazione di una piattaforma web per il contrasto alla violenza di genere: un caso studio incentrato sull'accessibilità delle informazioni, la protezione della privacy dell'utente e l'efficacia comunicativa del software.",
                     imgAlt: "Progetto_1522",
                 },
             ],
@@ -316,6 +322,7 @@
         background: rgba(255, 255, 255, 0.03);
         background-position: center;
         background-size: contain;
+        background-repeat: no-repeat;
         border: 1px dashed rgba(111, 211, 255, 0.3);
         border-radius: 15px;
         display: flex;
