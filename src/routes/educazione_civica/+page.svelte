@@ -47,10 +47,10 @@
             projects: [
                 {
                     title: "Cyberbullismo e Netiquette",
-                    meta: "Materia: Informatica // A.S. 2023/2024",
+                    meta: "Materia: Informatica // A.S. 2024/2025",
                     desc: "Approfondimento sulle dinamiche della rete, la protezione dei dati personali e le responsabilità legali e morali nell'uso dei social network.",
-                    imgAlt: "Presentazione Cyberbullismo",
-                },
+                    imgAlt: "Cod_Towe",
+                }
             ],
         },
         {
@@ -58,10 +58,16 @@
             yearDesc: "Lavoro, sicurezza e cittadinanza attiva.",
             projects: [
                 {
-                    title: "Sicurezza sul Lavoro",
-                    meta: "Materia: Sistemi e Reti // A.S. 2024/2025",
-                    desc: "Corso di formazione specifica sulla sicurezza negli ambienti di lavoro, fondamentale per l'integrazione nei percorsi di PCTO.",
-                    imgAlt: "Attestato Sicurezza",
+                    title: "Progetto Videogioco: Cod Tower",
+                    meta: "Educazione Civica // Informatica // A.S. 2024/2025",
+                    desc: "Un progetto volto a sensibilizzare gli utenti sul tema della dipendenza da videogiochi.",
+                    imgAlt: "Cod_Tower",
+                },
+                {
+                    title: "Progetto: Quiz Patente",
+                    meta: "Informatica // Sviluppo Web // A.S. 2024/2025",
+                    desc: "Un'applicazione interattiva progettata per l'esercitazione e il completamento dei quiz ministeriali della patente.",
+                    imgAlt: "Quiz_Patente",
                 },
             ],
         },
@@ -73,7 +79,7 @@
                     title: "Cittadinanza e Innovazione",
                     meta: "Materia: Telecomunicazioni // A.S. 2025/2026",
                     desc: "Riflessione sul ruolo dell'ingegneria e della tecnologia nella società moderna e l'importanza dell'etica professionale nel settore IT.",
-                    imgAlt: "Progetto Innovazione",
+                    imgAlt: "Progetto_1522",
                 },
             ],
         },
@@ -134,8 +140,8 @@
                             <p>{year.projects[activeSlides[yearIndex]].desc}</p>
                         </div>
                         <aside>
-                            <div class="placeholder-box">
-                                {year.projects[activeSlides[yearIndex]].imgAlt}
+                            <div class="placeholder-box" style="background-image: url({ base }/asset/project_ed_civica/{year.projects[activeSlides[yearIndex]].imgAlt}/image.png);">
+                                
                             </div>
                         </aside>
                     </div>
@@ -308,6 +314,8 @@
         width: 100%;
         aspect-ratio: 16/9;
         background: rgba(255, 255, 255, 0.03);
+        background-position: center;
+        background-size: contain;
         border: 1px dashed rgba(111, 211, 255, 0.3);
         border-radius: 15px;
         display: flex;
