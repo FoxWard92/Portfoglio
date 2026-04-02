@@ -10,17 +10,11 @@
                 "Introduzione alla cittadinanza digitale e ai fondamenti della Costituzione.",
             projects: [
                 {
-                    title: "La Costituzione Italiana",
-                    meta: "Materia: Diritto // A.S. 2021/2022",
-                    desc: "Analisi dei principi fondamentali della nostra Carta Costituzionale, con particolare attenzione agli articoli riguardanti i diritti e i doveri del cittadino.",
-                    imgAlt: "Documento Costituzione Italiana",
-                },
-                {
-                    title: "La Costituzione Francese",
-                    meta: "Materia: Diritto // A.S. 2021/2022",
-                    desc: "Studio comparato sui principi fondamentali della costituzione francese e le differenze con l'ordinamento italiano.",
-                    imgAlt: "Documento Costituzione Francese",
-                },
+                    title: "Terraformazione Pianeti",
+                    meta: "FISICA // PRESENTAZIONE // A.S. 2021/2022",
+                    desc: "Indagine sulle sfide dell'astrofisica moderna: come trasformare l'ambiente di Marte attraverso l'ingegneria planetaria, analizzando la gestione delle radiazioni cosmiche e la creazione di un campo magnetico artificiale.",
+                    imgAlt: "Terra_Pianeti",
+                }
             ],
         },
         {
@@ -28,17 +22,11 @@
             yearDesc: "Sostenibilità ambientale e l'Agenda 2030.",
             projects: [
                 {
-                    title: "Sostenibilità e Risorse",
-                    meta: "Materia: Scienze // A.S. 2022/2023",
-                    desc: "Studio dell'impatto ambientale delle tecnologie moderne e analisi degli obiettivi dell'Agenda 2030 per lo sviluppo sostenibile del pianeta.",
-                    imgAlt: "Progetto Sostenibilità",
-                },
-                {
-                    title: "Sostenibilità e Risorse",
-                    meta: "Materia: Scienze // A.S. 2022/2023",
-                    desc: "Studio dell'impatto ambientale delle tecnologie moderne e analisi degli obiettivi dell'Agenda 2030 per lo sviluppo sostenibile del pianeta.",
-                    imgAlt: "Progetto Sostenibilità",
-                },
+                    title: "Le Morti Sul Lavoro",
+                    meta: "STA // PRESENTAZIONE // A.S. 2022/2023",
+                    desc: "Analisi delle dinamiche degli infortuni mortali nei settori produttivi: uno studio incentrato sulle norme di prevenzione (D.Lgs 81/08), l'importanza dei dispositivi di protezione individuale e l'evoluzione della cultura della sicurezza sul lavoro",
+                    imgAlt: "Le_Morti_Sul_Lavoro",
+                }
             ],
         },
         {
@@ -86,6 +74,12 @@
                     meta: "INFORMATICA // WEB APP // A.S. 2025/2026",
                     desc: "Progettazione e realizzazione di una piattaforma web per il contrasto alla violenza di genere: un caso studio incentrato sull'accessibilità delle informazioni, la protezione della privacy dell'utente e l'efficacia comunicativa del software.",
                     imgAlt: "Progetto_1522",
+                },
+                {
+                    title: "Prigione Domestica",
+                    meta: "ITALIANO // ELABORATO // A.S. 2025/2026",
+                    desc: "Oltre il silenzio: uno studio sulla 'Prigione Domestica' che esamina la discrepanza tra abusi subiti e denunce effettive, riflettendo sulle responsabilità legali e la tutela della dignità umana.",
+                    imgAlt: "Prigione_Domestica",
                 },
             ],
         },
