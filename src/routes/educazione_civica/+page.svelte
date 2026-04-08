@@ -1,8 +1,8 @@
 <script>
-    import { fade } from "svelte/transition";
+    import { fade, fly } from "svelte/transition";
     import { base } from "$app/paths";
 
-    // Struttura dati: facile da aggiornare senza toccare l'HTML
+    // --- DATI ---
     const timeline = [
         {
             yearTitle: "Primo Anno",
@@ -14,7 +14,7 @@
                     meta: "FISICA // PRESENTAZIONE // A.S. 2021/2022",
                     desc: "Indagine sulle sfide dell'astrofisica moderna: come trasformare l'ambiente di Marte attraverso l'ingegneria planetaria, analizzando la gestione delle radiazioni cosmiche e la creazione di un campo magnetico artificiale.",
                     imgAlt: "Terra_Pianeti",
-                }
+                },
             ],
         },
         {
@@ -26,7 +26,7 @@
                     meta: "STA // PRESENTAZIONE // A.S. 2022/2023",
                     desc: "Analisi delle dinamiche degli infortuni mortali nei settori produttivi: uno studio incentrato sulle norme di prevenzione (D.Lgs 81/08), l'importanza dei dispositivi di protezione individuale e l'evoluzione della cultura della sicurezza sul lavoro",
                     imgAlt: "Le_Morti_Sul_Lavoro",
-                }
+                },
             ],
         },
         {
@@ -44,7 +44,7 @@
                     meta: "ITALIANO // ELABORATO // A.S. 2023/2024",
                     desc: "Analisi del periodo più violento della lotta tra Stato e criminalità organizzata: una riflessione sul valore della memoria attraverso le testimonianze dirette e la letteratura d'impegno civile.",
                     imgAlt: "Elaborato_La_Mattanza",
-                }
+                },
             ],
         },
         {
@@ -85,11 +85,8 @@
         },
     ];
 
-    // Array reattivo per tenere traccia della slide attiva per ogni anno
-    // Inizializza tutto a 0 (prima slide)
     let activeSlides = timeline.map(() => 0);
 
-    // Funzioni di navigazione
     function nextSlide(yearIndex) {
         const totalProjects = timeline[yearIndex].projects.length;
         activeSlides[yearIndex] = (activeSlides[yearIndex] + 1) % totalProjects;
@@ -104,16 +101,57 @@
     function goToSlide(yearIndex, projectIndex) {
         activeSlides[yearIndex] = projectIndex;
     }
+
+    // --- SVELTE ACTION PER LO SCROLL ---
+    // Questa funzione osserva l'elemento e aggiunge una classe quando entra nello schermo
+    // --- SVELTE ACTION PER LO SCROLL CONTINUO ---
+    function reveal(node, { type = "fade-up", delay = 0 } = {}) {
+        node.classList.add("reveal-hidden", type);
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        // Entra nello schermo: applica il ritardo e fa partire l'animazione
+                        node.style.transitionDelay = `${delay}ms`;
+                        node.classList.add("reveal-visible");
+                    } else {
+                        // Esce dallo schermo: rimuove il ritardo e nasconde l'elemento
+                        // in modo che sia pronto a rianimarsi quando torni su/giù
+                        node.style.transitionDelay = "0ms";
+                        node.classList.remove("reveal-visible");
+                    }
+                });
+            },
+            {
+                // threshold: 0.1 significa che basta che il 10% dell'elemento sia visibile
+                threshold: 0.1,
+                rootMargin: "0px 0px -10% 0px",
+            },
+        );
+
+        observer.observe(node);
+
+        return {
+            destroy() {
+                observer.disconnect();
+            },
+        };
+    }
 </script>
 
 <section>
     <div class="hero">
         <div class="profile-header">
-            <h1>Educazione Civica</h1>
-            <p class="tagline">Percorso Multidisciplinare // 2021 — 2026</p>
+            <h1 in:fly={{ y: 50, duration: 1000, delay: 100 }}>
+                Educazione Civica
+            </h1>
+            <p class="tagline" in:fly={{ y: 30, duration: 1000, delay: 400 }}>
+                Percorso Multidisciplinare // 2021 — 2026
+            </p>
         </div>
 
-        <div class="scroll-indicator">
+        <div class="scroll-indicator" in:fade={{ duration: 1000, delay: 800 }}>
             <span>Esplora i progetti</span>
             <div class="line"></div>
         </div>
@@ -122,12 +160,26 @@
     {#each timeline as year, yearIndex}
         <article class="year-section">
             <div class="year-header">
-                <span class="label">Timeline // 0{yearIndex + 1}</span>
-                <h2>{year.yearTitle}</h2>
-                <p class="description">{year.yearDesc}</p>
+                <span
+                    class="label"
+                    use:reveal={{ type: "slide-left", delay: 0 }}
+                    >Timeline // 0{yearIndex + 1}</span
+                >
+                <h2 use:reveal={{ type: "slide-left", delay: 150 }}>
+                    {year.yearTitle}
+                </h2>
+                <p
+                    class="description"
+                    use:reveal={{ type: "fade-up", delay: 300 }}
+                >
+                    {year.yearDesc}
+                </p>
             </div>
 
-            <div class="carousel-container">
+            <div
+                class="carousel-container"
+                use:reveal={{ type: "fade-up", delay: 400 }}
+            >
                 {#key activeSlides[yearIndex]}
                     <div class="split" in:fade={{ duration: 400 }}>
                         <div class="project-content">
@@ -139,10 +191,40 @@
                             </p>
                             <p>{year.projects[activeSlides[yearIndex]].desc}</p>
                         </div>
-                        <aside>
-                            <div class="placeholder-box" style="background-image: url({ base }/asset/project_ed_civica/{year.projects[activeSlides[yearIndex]].imgAlt}/image.png);">
-                                
-                            </div>
+                        <aside class="project-visual">
+                            <a
+                                href="{base}/asset/project_ed_civica/{year
+                                    .projects[activeSlides[yearIndex]]
+                                    .imgAlt}/file.zip"
+                                class="project-card-link"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label="Scarica il materiale del progetto"
+                            >
+                                <div
+                                    class="image-container"
+                                    style="background-image: url({base}/asset/project_ed_civica/{year
+                                        .projects[activeSlides[yearIndex]]
+                                        .imgAlt}/image.png);"
+                                ></div>
+
+                                <div class="overlay">
+                                    <span class="action-text"
+                                        >Scarica Progetto</span
+                                    >
+                                    <svg
+                                        class="download-icon"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                    >
+                                        <path
+                                            d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v4M7 10l5 5 5-5M12 15V3"
+                                        />
+                                    </svg>
+                                </div>
+                            </a>
                         </aside>
                     </div>
                 {/key}
@@ -188,7 +270,36 @@
         color: #ffffff;
         padding-bottom: 15vh;
         font-family: "Inter", sans-serif;
+        /* Per evitare scroll orizzontale durante le animazioni slide-left/right */
+        overflow-x: hidden;
     }
+
+    /* --- CLASSI PER LE ANIMAZIONI ALLO SCROLL --- */
+    :global(.reveal-hidden) {
+        opacity: 0;
+        transition:
+            opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+            transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: opacity, transform;
+    }
+
+    :global(.reveal-hidden.fade-up) {
+        transform: translateY(40px);
+    }
+
+    :global(.reveal-hidden.slide-left) {
+        transform: translateX(-50px);
+    }
+
+    :global(.reveal-hidden.slide-right) {
+        transform: translateX(50px);
+    }
+
+    :global(.reveal-visible) {
+        opacity: 1 !important;
+        transform: translate(0, 0) !important;
+    }
+    /* ------------------------------------------- */
 
     /* HERO */
     .hero {
@@ -241,7 +352,6 @@
         max-width: 1200px;
         margin: 0 auto;
         padding: 10vh 2rem;
-        /* Sostituisce l'HR: crea uno stacco naturale con lo spazio */
         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
@@ -265,6 +375,7 @@
         text-transform: uppercase;
         letter-spacing: 3px;
         color: rgba(255, 255, 255, 0.4);
+        display: inline-block; /* Necessario per animare i transform sugli span */
     }
 
     .description {
@@ -276,7 +387,7 @@
     /* PROGETTO E CAROUSEL */
     .carousel-container {
         position: relative;
-        min-height: 350px; /* Previene salti di layout durante la transizione */
+        min-height: 350px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -309,24 +420,99 @@
         color: rgba(255, 255, 255, 0.8);
         font-size: 1.1rem;
     }
-
-    .placeholder-box {
+    .project-card-link {
+        display: block;
+        position: relative;
         width: 100%;
-        aspect-ratio: 16/9;
-        background: rgba(255, 255, 255, 0.03);
+        aspect-ratio: 16/9; /* FONDAMENTALE: l'altezza ora è comandata dal contenitore padre */
+        text-decoration: none;
+        border-radius: 20px;
+        overflow: hidden;
+        background: rgba(
+            255,
+            255,
+            255,
+            0.05
+        ); /* Colore di fallback se l'immagine carica lentamente */
+        border: 1px solid rgba(111, 211, 255, 0.15);
+        transform: translateZ(0); /* Fix per i bordi su Safari */
+    }
+
+    .image-container {
+        position: absolute; /* Si spalma perfettamente nel parent */
+        inset: 0;
+        width: 100%;
+        height: 100%;
         background-position: center;
-        background-size: contain;
+        background-size: cover;
         background-repeat: no-repeat;
-        border: 1px dashed rgba(111, 211, 255, 0.3);
-        border-radius: 15px;
+        transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        z-index: 1;
+    }
+
+    .overlay {
+        position: absolute;
+        inset: 0; /* Si spalma perfettamente nel parent */
+        z-index: 2;
+
+        /* Reso più trasparente (0.4) così vedi i colori dell'immagine sotto */
+        background: rgba(8, 26, 51, 0.4);
+
+        /* Aumentato il blur e aggiunto supporto Webkit */
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
-        color: rgba(255, 255, 255, 0.2);
-        font-size: 0.8rem;
+        gap: 15px;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+    }
+
+    .action-text {
+        color: #fff;
+        font-size: 0.9rem;
+        font-weight: 600;
         text-transform: uppercase;
-        text-align: center;
-        padding: 1rem;
+        letter-spacing: 2px;
+        transform: translateY(10px);
+        transition: transform 0.4s ease;
+    }
+
+    .download-icon {
+        width: 32px;
+        height: 32px;
+        color: #6fd3ff;
+        transform: translateY(10px);
+        transition: transform 0.4s ease 0.1s;
+    }
+
+    /* --- AZIONI HOVER --- */
+
+    .project-card-link:hover {
+        border-color: rgba(111, 211, 255, 0.5);
+        box-shadow:
+            0 20px 40px rgba(0, 0, 0, 0.4),
+            0 0 20px rgba(111, 211, 255, 0.1);
+    }
+
+    .project-card-link:hover .image-container {
+        transform: scale(1.1);
+    }
+
+    .project-card-link:hover .overlay {
+        opacity: 1;
+    }
+
+    .project-card-link:hover .action-text,
+    .project-card-link:hover .download-icon {
+        transform: translateY(0);
+    }
+
+    .project-card-link:active {
+        transform: scale(0.98);
     }
 
     /* CONTROLLI GALLERIA */

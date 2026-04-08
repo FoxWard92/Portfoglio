@@ -1,53 +1,80 @@
 <script>
-  import { base } from '$app/paths';
+    import { base } from '$app/paths';
+    import { fade, fly } from 'svelte/transition';
+
+    // Funzione Action per lo scroll (stessa logica del file precedente)
+    function reveal(node, { type = 'fade-up', delay = 0 } = {}) {
+        node.classList.add('reveal-hidden', type);
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    node.style.transitionDelay = `${delay}ms`;
+                    node.classList.add('reveal-visible');
+                } else {
+                    node.style.transitionDelay = '0ms';
+                    node.classList.remove('reveal-visible');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: "0px 0px -10% 0px"
+        });
+
+        observer.observe(node);
+        return {
+            destroy() { observer.disconnect(); }
+        };
+    }
 </script>
 
 <section>
     <div class="hero">
         <div class="profile-header">
-            <div class="profile-circle">
+            <div class="profile-circle" in:fly={{ y: -50, duration: 1000, delay: 200 }}>
                 <img src="{base}/asset/cert/profile_icon.jpeg" alt="Nickolas Trovato" />
             </div>
-            <h1>Nickolas Trovato</h1>
-            <p class="tagline">Informatica & Telecomunicazioni</p>
+            
+            <h1 in:fly={{ y: 50, duration: 1000, delay: 400 }}>Nickolas Trovato</h1>
+            <p class="tagline" in:fade={{ duration: 1000, delay: 800 }}>Informatica & Telecomunicazioni</p>
         </div>
         
-        <div class="scroll-indicator">
-            <span>Scrolla Per vedere</span>
+        <div class="scroll-indicator" in:fade={{ duration: 1000, delay: 1200 }}>
+            <span>Chi sono</span>
             <div class="line"></div>
         </div>
     </div>
 
     <article>
-        <span class="label">01 // Introduzione e Obiettivi</span>
-        <p class="big-text">
-            Sono uno studente del triennio specializzato in Informatica e Telecomunicazioni presso l’Istituto Tecnico Tecnologico Agnelli di Torino, con diploma previsto per luglio 2026.
+        <span class="label" use:reveal={{ type: 'slide-left', delay: 0 }}>01 // Introduzione e Obiettivi</span>
+        <p class="big-text" use:reveal={{ type: 'slide-left', delay: 200 }}>
+            Sono uno studente del triennio specializzato in Informatica e Telecomunicazioni presso l’Istituto Tecnico Tecnologico Agnelli di Torino.
         </p>
-        <p class="description">
-            Sono profondamente appassionato di sistemi informatici, programmazione e sviluppo web. Il mio percorso scolastico e i progetti pratici svolti in laboratorio mi hanno permesso di acquisire solide basi tecniche, che sono motivato ad applicare in contesti reali e sfidanti. Recentemente ho superato con successo il test d’ingresso (TIL) per l'ammissione ai corsi di laurea dell'area Ingegneria del Politecnico di Torino per l'anno 2026/27.
+        <p class="description" use:reveal={{ type: 'fade-up', delay: 400 }}>
+            Sono profondamente appassionato di sistemi informatici, programmazione e sviluppo web. Il mio percorso scolastico e i progetti pratici svolti in laboratorio mi hanno permesso di acquisire solide basi tecniche, che sono motivato ad applicare in contesti reali.
         </p>
     </article>
 
     <article>
-        <span class="label">02 // Formazione e Competenze Tecniche</span>
+        <span class="label" use:reveal={{ type: 'slide-left' }}>02 // Formazione e Competenze Tecniche</span>
         <div class="grid-skills">
-            <div>
+            <div use:reveal={{ type: 'fade-up', delay: 100 }}>
                 <h3>Sistemi e Reti</h3>
                 <p>Gestione di sistemi di elaborazione dati, sistemi operativi e reti locali.</p>
             </div>
-            <div>
+            <div use:reveal={{ type: 'fade-up', delay: 200 }}>
                 <h3>Progettazione Informatica</h3>
                 <p>Sviluppo di software client-server e progettazione di protocolli di comunicazione.</p>
             </div>
-            <div>
+            <div use:reveal={{ type: 'fade-up', delay: 300 }}>
                 <h3>Programmazione</h3>
                 <p>Padronanza dei linguaggi C, C++, Java e JavaScript, orientata alla creazione di algoritmi, interfacce utente e applicazioni web.</p>
             </div>
-            <div>
+            <div use:reveal={{ type: 'fade-up', delay: 400 }}>
                 <h3>Telecomunicazioni</h3>
                 <p>Analisi dei parametri di sistema e delle reti di trasmissione.</p>
             </div>
-            <div>
+            <div use:reveal={{ type: 'fade-up', delay: 500 }}>
                 <h3>Hardware e Microcontrollori</h3>
                 <p>Esperienza pratica nell'uso di schede Arduino e Raspberry Pi, inclusa la creazione di progetti domotici.</p>
             </div>
@@ -61,9 +88,30 @@
         color: #ffffff;
         padding-bottom: 10vh;
         font-family: 'Inter', sans-serif;
+        overflow-x: hidden; /* Evita glitch con le animazioni laterali */
     }
 
-    /* HERO SECTION */
+    /* --- CLASSI PER ANIMAZIONI SCROLL --- */
+    :global(.reveal-hidden) {
+        opacity: 0;
+        transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: opacity, transform;
+    }
+
+    :global(.reveal-hidden.fade-up) {
+        transform: translateY(40px);
+    }
+
+    :global(.reveal-hidden.slide-left) {
+        transform: translateX(-50px);
+    }
+
+    :global(.reveal-visible) {
+        opacity: 1 !important;
+        transform: translate(0, 0) !important;
+    }
+    /* ------------------------------------ */
+
     .hero {
         height: 100vh;
         display: flex;
@@ -129,7 +177,6 @@
         background: linear-gradient(to bottom, #6fd3ff, transparent);
     }
 
-    /* ARTICOLI (SEZIONI) */
     article {
         max-width: 1200px;
         margin: 0 auto;
@@ -137,7 +184,7 @@
     }
 
     .label {
-        display: block;
+        display: inline-block; /* Importante per l'animazione */
         font-size: 0.9rem;
         text-transform: uppercase;
         letter-spacing: 3px;
@@ -168,7 +215,6 @@
         margin-bottom: 1rem;
     }
 
-    /* LAYOUT SPECIFICI */
     .grid-skills {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
