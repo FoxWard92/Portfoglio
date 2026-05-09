@@ -45,6 +45,12 @@
                     desc: "Analisi del periodo più violento della lotta tra Stato e criminalità organizzata: una riflessione sul valore della memoria attraverso le testimonianze dirette e la letteratura d'impegno civile.",
                     imgAlt: "Elaborato_La_Mattanza",
                 },
+                {
+                    title: "Modern Presentazione AI",
+                    meta: "TELECOMUNICAZIONI // PRESENTAZIONE // A.S. 2023/2024",
+                    desc: "Un'analisi approfondita dell'impatto dell'intelligenza artificiale nel settore delle telecomunicazioni: dallo studio degli algoritmi di machine learning per l'ottimizzazione delle reti alla gestione automatizzata del traffico dati, esplorando le nuove frontiere della connettività intelligente.",
+                    imgAlt: "Modern_Presentazione_AI",
+                },
             ],
         },
         {
