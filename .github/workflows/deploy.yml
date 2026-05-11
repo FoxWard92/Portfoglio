@@ -3,6 +3,8 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: 'main' # Controlla se la tua branch principale si chiama main o master
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 permissions:
   contents: read
