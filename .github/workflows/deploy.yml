@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: 'main' # Controlla se la tua branch principale si chiama main o master
+    branches: 'main' # Controlla se la tua branch principale si chiama main o master 
 
 permissions:
   contents: read
