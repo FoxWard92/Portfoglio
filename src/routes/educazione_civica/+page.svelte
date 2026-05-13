@@ -80,6 +80,8 @@
     :global(.reveal-visible) { opacity: 1 !important; transform: translate(0, 0) !important; }
 
     .intro {
+        padding-left: 20px;
+        padding-right: 20px;
         text-align: center;
         color: rgba(255,255,255,0.5);
         margin-bottom: 4rem;
