@@ -445,7 +445,6 @@
         bottom: 0;
         width: 100%;
         height: 0;
-        opacity: 0;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -455,6 +454,7 @@
         font-size: 0.75rem;
         transition: 0.5s;
         z-index: 5;
+        opacity: 0;
     }
     footer.scrolled {
         opacity: 1;
