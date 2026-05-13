@@ -445,6 +445,7 @@
         bottom: 0;
         width: 100%;
         height: 0;
+        opacity: 0;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -456,6 +457,7 @@
         z-index: 5;
     }
     footer.scrolled {
+        opacity: 1;
         height: 40px;
     }
 
