@@ -61,14 +61,7 @@
 </section>
 
 <style>
-    .container {
-        width: 100%;
-        max-width: 1200px;
-        margin: 0 auto;
-        color: #fff;
-        font-family: 'Inter', sans-serif;
-    }
-
+    
     /* Reveal System */
     :global(.reveal-hidden) {
         opacity: 0;
@@ -78,6 +71,14 @@
     }
     :global(.reveal-hidden.fade-up) { transform: translateY(30px); }
     :global(.reveal-visible) { opacity: 1 !important; transform: translate(0, 0) !important; }
+    
+    .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        color: #fff;
+        font-family: 'Inter', sans-serif;
+    }
 
     .intro {
         padding: 0px 20px 0px 20px;
