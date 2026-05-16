@@ -26,6 +26,67 @@
                     desc: "Oltre il silenzio: uno studio sulla 'Prigione Domestica' che esamina la discrepanza tra abusi subiti e denunce effettive, riflettendo sulle responsabilità legali e la tutela della dignità umana.",
                     imgAlt: "Prigione_Domestica",
                 },
+                {
+                    title: "L'amore mio non muore",
+                    meta: "ARGOMENTO VISTO // A.S. 2025/2026",
+                    desc: "Una riflessione nata dall'incontro con Roberto Saviano e dal suo libro, che esplora il tema dell'amore come forma di resistenza civile e personale contro la violenza e il sopruso.",
+                    imgAlt: "lamore_mio_non_muore",
+                },
+                {
+                    title: "La Prigionia Del Lager (Zona Grigia)",
+                    meta: "ARGOMENTO VISTO // A.S. 2025/2026",
+                    desc: "Un approfondimento sul pensiero di Primo Levi: la 'zona grigia' come spazio morale ambiguo tra vittima e carnefice, e il senso di vergogna paradossale vissuto dai sopravvissuti ai campi di concentramento.",
+                    imgAlt: "la_prigionia_del_Lager_zona_grigia",
+                },
+                {
+                    title: "Aktion T4 e progetto Lebensborn",
+                    meta: "ARGOMENTO VISTO // A.S. 2025/2026",
+                    desc: "Un'analisi delle operazioni naziste meno note: l'Aktion T4, il programma di eutanasia contro i disabili, e il Lebensborn, il progetto di riproduzione selettiva per la 'razza ariana', entrambi espressioni dell'ideologia eugenetica del regime.",
+                    imgAlt: "aktion_t4_e_progetto_Lebensborn",
+                },
+                {
+                    title: "La Costituzione e i suoi principi fondamentali (articoli 1-12)",
+                    meta: "ARGOMENTO VISTO // A.S. 2025/2026",
+                    desc: "Un'esplorazione dei dodici articoli fondamentali della Costituzione italiana: i valori di democrazia, lavoro, uguaglianza e pace che fondano l'identità civile e giuridica della Repubblica.",
+                    imgAlt: "la_costituzione_e_i_suoi_principi_fondamentali_articoli_1_12",
+                },
+                {
+                    title: "Il Movimento Del '68",
+                    meta: "ARGOMENTO VISTO // A.S. 2025/2026",
+                    desc: "Un'analisi del '68 come momento di rottura culturale e sociale globale: le contestazioni studentesche, la critica all'autorità, i diritti civili e l'eredità che questo movimento ha lasciato nella politica e nella società contemporanea.",
+                    imgAlt: "il_movimento_del_68",
+                },
+            ],
+        },
+
+        {
+            yearTitle: "INGLESE",
+            materiaDesc: "SOCIETÀ, SICUREZZA & LETTERATURA CIVILE",
+            projects: [
+                {
+                    title: "Water and soil pollution",
+                    meta: "ARGOMENTO VISTO // A.S. 2025/2026",
+                    desc: "Un'analisi delle principali cause di inquinamento di acqua e suolo — industria, agricoltura intensiva, rifiuti — e delle misure preventive e normative adottabili a livello locale e globale.",
+                    imgAlt: "water_and_soil_pollutio",
+                },
+                {
+                    title: "Social and ethical problems of Internet",
+                    meta: "ARGOMENTO VISTO // A.S. 2025/2026",
+                    desc: "Un'esplorazione dei principali dilemmi etici e sociali legati alla rete: privacy, fake news, dipendenza digitale, cyberbullismo e la responsabilità individuale e collettiva nell'era digitale.",
+                    imgAlt: "social_and_ethical_problems_of_internet",
+                },
+                {
+                    title: "Online dangers and how to use internet safely",
+                    meta: "ARGOMENTO VISTO // A.S. 2025/2026",
+                    desc: "Un percorso sui pericoli concreti della rete — phishing, adescamento, truffe online — e sulle buone pratiche per navigare in modo consapevole e sicuro.",
+                    imgAlt: "online_dangers_and_how_to_use_internet_safely",
+                },
+                {
+                    title: "Advantages and disadvantages of artificial intelligence",
+                    meta: "ARGOMENTO VISTO // A.S. 2025/2026",
+                    desc: "Un'analisi bilanciata dell'intelligenza artificiale: le opportunità in medicina, lavoro e ricerca da un lato, e i rischi legati alla disoccupazione, alla sorveglianza e alla perdita di autonomia umana dall'altro.",
+                    imgAlt: "advantages_and_disadvantages_of_artificial_intelligence",
+                }
             ],
         },
     ];
