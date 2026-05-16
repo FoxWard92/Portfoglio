@@ -61,7 +61,7 @@
 
         {
             yearTitle: "INGLESE",
-            materiaDesc: "SOCIETÀ, SICUREZZA & LETTERATURA CIVILE",
+            materiaDesc: "SOCIETÀ, TEMI & LINGUE",
             projects: [
                 {
                     title: "Water and soil pollution",
